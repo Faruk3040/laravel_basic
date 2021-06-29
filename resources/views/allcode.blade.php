@@ -51,3 +51,29 @@
     var data = @json($users);
     console.log(data[0]);
 </script>
+
+//api http clint
+
+<h1>This is User Page</h1>
+<h3>User List</h3>
+<table border="2">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Profil Photo</td>
+    </tr>
+    @foreach ($collection as $item)
+        <tr>
+            <td>{{ $item['id'] }}</td>
+            <td>{{ $item['first_name'] }}</td>
+            <td>{{ $item['email'] }}</td>
+            <td><img src={{ $item['avatar'] }}></td>
+        </tr>
+
+    @endforeach
+</table>
+
+<h2>Hello,{{ session('user') }}</h2>
+
+<a href="/logout">Logout</a>

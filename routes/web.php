@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\AddMember;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserAuth;
 use App\Http\Middleware\ageCheck;
+use Illuminate\Support\Facades\App;
 
 
 /*
@@ -43,6 +47,51 @@ Route::view('contact', 'contact');
 //Route::view('login', 'users');
 
 //Route::view('user', 'user');
-Route::view('users', 'users');
+Route::view('users', 'users')->middleware('protectedPage');
 Route::view('home', 'home');
 Route::view('noaccess', 'noaccess');
+
+//Route::group(['middleware'=>['protectedPage']], function(){
+  //  Route::view('users', 'users');
+//});
+
+//Route::get('/users',[UsersController::class,'index']);
+
+Route::put("users",[UsersController::class,'testRequest']);
+Route::view('login', 'users');
+
+//Route::view('login', 'login');
+Route::post("user",[UserAuth::class,'userLogin']);
+//Route::view('profile', 'profile');
+
+//Route::get('/login', function () {
+  //  if(session()->has('user'))
+ //   {
+ //      return redirect('profile');
+ //   }
+  //  return view('login');
+//});
+
+
+Route::get('/logout', function () {
+    if(session()->has('user'))
+    {
+        session()->pull('user');
+    }
+    return redirect('login');
+});
+
+
+Route::view('add', 'add');
+Route::post('addmember',[AddMember::class,'add']);
+
+Route::view('upload', 'upload');
+Route::post('upload',[UploadController::class,'index']);
+
+//Route::view('profile', 'profile');
+
+
+Route::get('/profile/{lang}', function ($lang) {
+    App::setlocale($lang);
+    return view('profile');
+});

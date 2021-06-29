@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class UsersController extends Controller
 {
@@ -18,13 +19,24 @@ class UsersController extends Controller
     return view('users',['users' => $data]);
   }
 */
-  public function getData(Request $request){
-      $request->validate([
-        'username' => 'required',
-        'userpassword' => 'required|min:5',
-      ]);
-      return $request->input();
+ // public function getData(Request $request){
+ //     $request->validate([
+ //       'username' => 'required',
+//        'userpassword' => 'required|min:5',
+ //     ]);
+ //     return $request->input();
 
-  }
+ // }
+
+ //function index(){
+  //   return "API will be here:";
+  //    $collection = Http::get("https://reqres.in/api/users?page=1");
+   //   return view('users' ,['collection'=>$collection['data']]);
+ //}
+
+ function testRequest(Request $request)
+ {
+    return $request->input();
+ }
 
 }

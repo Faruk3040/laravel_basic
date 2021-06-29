@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ageCheck
+class monthCheck
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class ageCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->age && $request->age<18)
+        if($request->month && $request->month<6)
         {
             return redirect('noaccess');
         }
